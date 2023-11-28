@@ -17,15 +17,29 @@ interface UserCardProps {
   userData: UserEntity;
   setFormVisibility: React.Dispatch<boolean>;
   formVisibility: boolean;
+  deleteVisibilty: boolean;
+  setDeleteVisibility: React.Dispatch<boolean>;
 }
 
 export default function UserCard({
+  deleteVisibilty,
+  setDeleteVisibility,
   setFormVisibility,
   formVisibility,
   userData,
 }: UserCardProps) {
   const toggleFormVisibility = () => {
+    if (formVisibility === false) {
+      setDeleteVisibility(false);
+    }
     setFormVisibility(!formVisibility);
+  };
+
+  const toggleDeleteVisibility = () => {
+    if (deleteVisibilty === false) {
+      setFormVisibility(false);
+    }
+    setDeleteVisibility(!deleteVisibilty);
   };
   return (
     <UserCardContainer>
@@ -54,7 +68,9 @@ export default function UserCard({
       </FlexView>
       <ButtonsContainer>
         <DeleteButton>
-          <ButtonText>Deletar Usuário</ButtonText>
+          <ButtonText onPress={toggleDeleteVisibility}>
+            Deletar Usuário
+          </ButtonText>
         </DeleteButton>
         <EditButton onPress={toggleFormVisibility}>
           <ButtonText>Editar Usuário</ButtonText>

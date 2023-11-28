@@ -7,6 +7,16 @@
   <img alt="Expo" src="https://img.shields.io/badge/Expo-1B1F23?style=for-the-badge&logo=expo&logoColor=white" />
 </p>
 
+# Preview
+ 
+
+<p align="center">
+  <img alt="Project Gif" src="https://github.com/emanuelmarcolongo/user-hub/blob/master/assets/appPresentation.gif?raw=true" />
+</p>
+
+
+
+
 <p align="center">
 Este é um aplicativo React Native desenvolvido com o intuito de ser um CRUD para gerenciamento dos usuários.
   Receba uma lista dos usuários, adicione, edite e delete os mesmos

@@ -14,8 +14,8 @@ export default function UserProfilePage() {
   const route = useRoute();
   const [formVisibility, setFormVisibility] = useState<boolean>(false);
   const [deleteVisibilty, setDeleteVisibility] = useState<boolean>(false);
-
   const { userData } = route.params as RouteParams;
+  const [displayData, setDisplayData] = useState<UserEntity>(userData);
 
   return (
     <View>
@@ -24,9 +24,14 @@ export default function UserProfilePage() {
         setDeleteVisibility={setDeleteVisibility}
         formVisibility={formVisibility}
         setFormVisibility={setFormVisibility}
-        userData={userData}
+        userData={displayData}
       ></UserCard>
-      {formVisibility && <EditUserForm userData={userData}></EditUserForm>}
+      {formVisibility && (
+        <EditUserForm
+          setDisplayData={setDisplayData}
+          userData={displayData}
+        ></EditUserForm>
+      )}
       {deleteVisibilty && (
         <DeleteUserComponent
           setDeleteVisibility={setDeleteVisibility}

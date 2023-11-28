@@ -23,17 +23,20 @@ interface UserFormData {
 
 interface editUserFormProps {
   userData: UserEntity;
+  setDisplayData: React.Dispatch<UserEntity>;
 }
-export default function EditUserForm({ userData }: editUserFormProps) {
+export default function EditUserForm({
+  userData,
+  setDisplayData,
+}: editUserFormProps) {
   const [formData, setFormData] = useState<UserFormData>({
     name: "",
     email: "",
     imgUrl: "",
     password: "",
   });
-
+  const { id, isDeleted, ...userInfo } = userData;
   useEffect(() => {
-    const { id, isDeleted, ...userInfo } = userData;
     setFormData(userInfo);
   }, []);
 
@@ -53,13 +56,13 @@ export default function EditUserForm({ userData }: editUserFormProps) {
   };
 
   const editUser = async () => {
+    console.log(id);
+    console.log(formData);
     try {
-      const response = await axios.put(
-        `${API_URL}/users/${userData.id}`,
-        formData
-      );
+      const response = await axios.put(`${API_URL}/users/${id}`, formData);
       if (response.status === 200) {
         setSucessMessage("Usuário editado com sucesso!!");
+        setDisplayData({ ...formData, id, isDeleted });
       }
     } catch (error) {
       console.log(error);

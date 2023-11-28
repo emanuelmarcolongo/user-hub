@@ -11,7 +11,7 @@ import {
 import { FontAwesome5 } from "@expo/vector-icons";
 import axios from "axios";
 import API_URL from "../../../../utils/Urls/API-URL";
-import { Keyboard } from "react-native";
+import { ActivityIndicator, Keyboard } from "react-native";
 import { UserEntity } from "../../../../utils/Types/userType";
 
 interface UserFormData {
@@ -141,6 +141,8 @@ export default function EditUserForm({ userData }: editUserFormProps) {
         onChangeText={(text) => handleInputChange("imgUrl", text)}
         placeholder="Insira uma URL de Imagem"
       />
+
+      {loading && <ActivityIndicator size="large" color={"#000"} />}
 
       {errorMessage && (
         <ErrorContainer>

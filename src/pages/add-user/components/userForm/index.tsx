@@ -11,7 +11,7 @@ import {
 import { FontAwesome5 } from "@expo/vector-icons";
 import axios from "axios";
 import API_URL from "../../../../utils/Urls/API-URL";
-import { Keyboard } from "react-native";
+import { ActivityIndicator, Keyboard } from "react-native";
 
 interface UserFormData {
   name: string;
@@ -28,7 +28,7 @@ export default function UserForm() {
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [sucessMessage, setSucessMessage] = useState("");
-  const [loading, isLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleInputChange = (field: keyof UserFormData, value: string) => {
     setFormData({ ...formData, [field]: value });
@@ -42,6 +42,7 @@ export default function UserForm() {
   };
 
   const addUser = async () => {
+    setLoading(true);
     try {
       const response = await axios.post(`${API_URL}/users`, formData);
       if (response.status === 201) {
@@ -58,8 +59,9 @@ export default function UserForm() {
         } else {
           return setErrorMessage(error.message);
         }
-        return setErrorMessage("Algo deu errado, tente novamente mais tarde");
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -117,6 +119,8 @@ export default function UserForm() {
         onChangeText={(text) => handleInputChange("imgUrl", text)}
         placeholder="Insira uma URL de Imagem"
       />
+
+      {loading && <ActivityIndicator size="large" color={"#000"} />}
 
       {errorMessage && (
         <ErrorContainer>

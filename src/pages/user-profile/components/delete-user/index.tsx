@@ -13,6 +13,7 @@ import {
 import API_URL from "../../../../utils/Urls/API-URL";
 import { useState } from "react";
 import { FontAwesome5 } from "@expo/vector-icons";
+import { ActivityIndicator } from "react-native";
 
 interface DeleteUserComponentProps {
   userId: number;
@@ -25,8 +26,10 @@ export default function DeleteUserComponent({
 }: DeleteUserComponentProps) {
   const [sucessMessage, setSucessMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleDeleteUser = async () => {
+    setLoading(true);
     try {
       const response = await axios.put(`${API_URL}/users/delete/${userId}`);
 
@@ -46,6 +49,8 @@ export default function DeleteUserComponent({
           return setErrorMessage(error.message);
         }
       }
+    } finally {
+      setLoading(false);
     }
   };
   return (
@@ -62,6 +67,7 @@ export default function DeleteUserComponent({
         </CancelButton>
       </DeleteOptionsContainer>
 
+      {loading && <ActivityIndicator size="large" color={"#000"} />}
       {errorMessage && (
         <ErrorContainer>
           <FontAwesome5 name="exclamation-triangle" color="red" size={16} />

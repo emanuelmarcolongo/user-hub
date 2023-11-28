@@ -1,20 +1,41 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { View } from "react-native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import AddUserPage from "./src/pages/add-user";
+import UsersPage from "./src/pages/users";
+import UserProfilePage from "./src/pages/user-profile";
+import { NavigationContainer } from "@react-navigation/native";
 
-export default function App() {
+const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
+
+function Tabs() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Tab.Navigator>
+      <Tab.Screen name="Usuarios" component={UsersPage} />
+      <Tab.Screen name="Adicionar" component={AddUserPage} />
+    </Tab.Navigator>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName="Tabs"
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        <Stack.Screen name="Tabs" component={Tabs} />
+        <Stack.Screen
+          name="Perfil do Usuario"
+          component={UserProfilePage}
+          options={{
+            headerShown: true,
+          }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}

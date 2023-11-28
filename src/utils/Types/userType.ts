@@ -4,6 +4,7 @@ export type UserEntity = {
   email: string;
   imgUrl: string;
   password: string;
+  isDeleted: boolean;
 };
 
 export type UserDTO = Omit<UserEntity, "id">;

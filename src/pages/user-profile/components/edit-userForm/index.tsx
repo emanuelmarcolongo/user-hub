@@ -33,7 +33,7 @@ export default function EditUserForm({ userData }: editUserFormProps) {
   });
 
   useEffect(() => {
-    const { id, ...userInfo } = userData;
+    const { id, isDeleted, ...userInfo } = userData;
     setFormData(userInfo);
   }, []);
 
@@ -58,13 +58,11 @@ export default function EditUserForm({ userData }: editUserFormProps) {
         `${API_URL}/users/${userData.id}`,
         formData
       );
-      console.log(response);
       if (response.status === 200) {
         setSucessMessage("Usuário editado com sucesso!!");
       }
     } catch (error) {
       console.log(error);
-
       if (axios.isAxiosError(error) && error.response) {
         if (error.response.status === 400) {
           return setErrorMessage(

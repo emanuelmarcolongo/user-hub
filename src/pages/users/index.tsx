@@ -20,7 +20,7 @@ export default function UsersPage() {
   const fetchUsers = async () => {
     try {
       const response = await axios.get(`${API_URL}/users`);
-      setUsers(response.data);
+      setUsers(response.data.reverse());
     } catch (error) {
       console.log(error);
     }

@@ -20,7 +20,10 @@ export default function UsersPage() {
   const fetchUsers = async () => {
     try {
       const response = await axios.get(`${API_URL}/users`);
-      setUsers(response.data.reverse());
+      const activeUsers = response.data
+        .reverse()
+        .filter((user: UserEntity) => !user.isDeleted);
+      setUsers(activeUsers);
     } catch (error) {
       console.log(error);
     }

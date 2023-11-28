@@ -46,7 +46,7 @@ export default function App() {
       >
         <Stack.Screen name="Tabs" component={Tabs} />
         <Stack.Screen
-          name="Perfil do Usuario"
+          name="Perfil"
           component={UserProfilePage}
           options={{
             headerShown: true,

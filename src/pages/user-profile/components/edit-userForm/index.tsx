@@ -95,6 +95,16 @@ export default function EditUserForm({ userData }: editUserFormProps) {
       return false;
     }
 
+    const strongPasswordregex =
+      /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+
+    if (!strongPasswordregex.test(formData.password)) {
+      setErrorMessage(
+        "A senha precisa conter um caracter numerico, letra e espeical"
+      );
+      return false;
+    }
+
     const urlRegex = /^(http|https):\/\//;
     if (!urlRegex.test(formData.imgUrl)) {
       setErrorMessage('A URL da imagem deve começar com "http" ou "https".');

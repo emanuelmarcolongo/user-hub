@@ -1,4 +1,5 @@
-import { ListRenderItemInfo, Text, View } from "react-native";
+import { View } from "react-native";
+import { FontAwesome5 } from "@expo/vector-icons";
 import {
   Avatar,
   InfoText,
@@ -21,14 +22,17 @@ export default function UserCard({ userData }: UserCardProps) {
       />
       <View>
         <UserInfoContainer>
+          <FontAwesome5 name="hashtag" color="#000" size={16} />
           <InfoText>{userData.id}</InfoText>
         </UserInfoContainer>
 
         <UserInfoContainer>
+          <FontAwesome5 name="user" color="#000" size={16} />
           <InfoText>{userData.name}</InfoText>
         </UserInfoContainer>
 
         <UserInfoContainer>
+          <FontAwesome5 name="at" color="#000" size={16} />
           <InfoText>{userData.email}</InfoText>
         </UserInfoContainer>
       </View>

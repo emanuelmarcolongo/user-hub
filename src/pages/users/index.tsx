@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FlatList, StyleSheet, Text, View, Image } from "react-native";
+import { FlatList, View } from "react-native";
 import axios from "axios";
 import API_URL from "../../utils/Urls/API-URL";
 import UserCard from "./components/user-card";

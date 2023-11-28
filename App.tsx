@@ -5,6 +5,7 @@ import AddUserPage from "./src/pages/add-user";
 import UsersPage from "./src/pages/users";
 import UserProfilePage from "./src/pages/user-profile";
 import { NavigationContainer } from "@react-navigation/native";
+import { FontAwesome5 } from "@expo/vector-icons";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -12,8 +13,24 @@ const Tab = createBottomTabNavigator();
 function Tabs() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Usuarios" component={UsersPage} />
-      <Tab.Screen name="Adicionar" component={AddUserPage} />
+      <Tab.Screen
+        name="Usuarios"
+        component={UsersPage}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome5 name="users" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Adicionar"
+        component={AddUserPage}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome5 name="plus" color={color} size={size} />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 }

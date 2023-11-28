@@ -15,9 +15,18 @@ import { UserEntity } from "../../../../utils/Types/userType";
 
 interface UserCardProps {
   userData: UserEntity;
+  setFormVisibility: React.Dispatch<boolean>;
+  formVisibility: boolean;
 }
 
-export default function UserCard({ userData }: UserCardProps) {
+export default function UserCard({
+  setFormVisibility,
+  formVisibility,
+  userData,
+}: UserCardProps) {
+  const toggleFormVisibility = () => {
+    setFormVisibility(!formVisibility);
+  };
   return (
     <UserCardContainer>
       <FlexView>
@@ -47,7 +56,7 @@ export default function UserCard({ userData }: UserCardProps) {
         <DeleteButton>
           <ButtonText>Deletar Usuário</ButtonText>
         </DeleteButton>
-        <EditButton>
+        <EditButton onPress={toggleFormVisibility}>
           <ButtonText>Editar Usuário</ButtonText>
         </EditButton>
       </ButtonsContainer>
